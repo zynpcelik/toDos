@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AddInput from "./AddInput";
+import List from "./List";
+import { nanoid } from "nanoid";
+import React, { useState } from "react";
+
+const data = [
+  { text: "learn js", completed: false, id: nanoid() },
+  { text: "learn jui jitsu", completed: false, id: nanoid() },
+  { text: "buy two smart cleaning vacuum", completed: false, id: nanoid() },
+];
 
 function App() {
+  const [todos, setTodos] = useState(data);
+
+  const toggleInput = (id) => {
+    let list = todos;
+    let listItem = todos.findIndex((todo) => todo.id === id);
+    list[listItem].completed = !list[listItem].completed;
+    setTodos(list);
+  };
+  const deleteInput = () => {
+    setTodos(todos.filter((todo) => todo.completed === false));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddInput setTodos={setTodos} />
+      <List todos={todos} toggleInput={toggleInput} deleteInput={deleteInput} />
     </div>
   );
 }
