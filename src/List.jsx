@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
+import { Box, Button, Text } from "@chakra-ui/react";
 
 const List = ({ todos, toggleInput, deleteInput }) => {
   const [filtered, setFiltered] = useState(todos);
   const filterList = (isCompleted) =>
     setFiltered(todos.filter((todo) => todo.completed === isCompleted));
 
-  /* const deleteState = () => {
-      setFiltered(todos.filter((todo) => todo.completed===true ))
-    }; */
-
   useEffect(() => setFiltered(todos), [todos]);
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      m="10"
+      width="%50"
+    >
       <br />
       <br />
-      <ul style={{ listStyle: "none" }}>
+      <Box listStyleType="none">
         {filtered.map((todo) => (
           <ListItem
             key={todo.id}
@@ -24,19 +27,49 @@ const List = ({ todos, toggleInput, deleteInput }) => {
             deleteInput={deleteInput}
           />
         ))}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <small>{todos.length} item</small>{" "}
-          </div>
-          <div>
-            <button onClick={() => filterList(false)}>Active</button>
-            <button onClick={() => filterList(true)}>Completed</button>
-            <button onClick={() => setFiltered(todos)}>Clear Filter</button>
-            <button onClick={() => deleteInput()}>Clear Completed</button>
-          </div>
-        </div>
-      </ul>
-    </div>
+      </Box>
+      <Box mt="10" display="flex" justifyContent="space-between">
+        <Box>
+          <Text fontSize="16" fontWeight="bold" color="#F5EAEA">
+            {todos.length} item
+          </Text>
+        </Box>
+        <Box display="flex" gap={3}>
+          <Button
+            width="130px"
+            size="sm"
+            colorScheme="green"
+            onClick={() => filterList(false)}
+          >
+            Active
+          </Button>
+          <Button
+            width="130px"
+            size="sm"
+            colorScheme="green"
+            onClick={() => filterList(true)}
+          >
+            Completed
+          </Button>
+          <Button
+            width="130px"
+            size="sm"
+            colorScheme="green"
+            onClick={() => setFiltered(todos)}
+          >
+            Clear Filter
+          </Button>
+          <Button
+            width="130px"
+            size="sm"
+            colorScheme="green"
+            onClick={() => deleteInput()}
+          >
+            Clear Completed
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

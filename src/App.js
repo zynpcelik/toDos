@@ -3,6 +3,7 @@ import AddInput from "./AddInput";
 import List from "./List";
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import { Box } from "@chakra-ui/react";
 
 const data = [
   { text: "learn js", completed: false, id: nanoid() },
@@ -24,10 +25,10 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Box className="App">
       <AddInput setTodos={setTodos} />
       <List todos={todos} toggleInput={toggleInput} deleteInput={deleteInput} />
-    </div>
+    </Box>
   );
 }
 

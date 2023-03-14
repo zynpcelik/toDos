@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Box, Text, Input } from "@chakra-ui/react";
 
 const ListItem = ({ todo, toggleInput }) => {
   const [checked, setChecked] = useState(todo.completed);
@@ -9,12 +10,18 @@ const ListItem = ({ todo, toggleInput }) => {
 
   return (
     <div>
-      <li key={todo.id}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <input type="checkbox" checked={checked} onChange={toggleChange} />
-          <div style={{ width: "400px" }}>{todo.text}</div>
-        </div>
-      </li>
+      <Box
+        mt="1"
+        key={todo.id}
+        display="flex"
+        justifyContent="space-between"
+        padding="3"
+      >
+        <input type="checkbox" checked={checked} onChange={toggleChange} />
+        <Text width="400px" fontWeight="bold" color="#F5EAEA">
+          {todo.text}
+        </Text>
+      </Box>
     </div>
   );
 };
